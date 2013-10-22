@@ -2,7 +2,7 @@
 int palindrom(char *retezec){
 	int delka,i;
 	for(delka=0;retezec[delka]!='\0';delka++);
-	for(i=0;i<delka;i++){
+	for(i=0;i<delka/2;i++){
 		if(retezec[i]!=retezec[delka-i-1]){
 			return 0;
 		}
