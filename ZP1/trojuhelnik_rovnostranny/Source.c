@@ -17,13 +17,18 @@ int shutdown(){
 	system("PAUSE");
 	return 0;
 }
+int restart(){
+	printf("\n\n");
+	fflush(stdin);
+	return main();
+}
 int main(){
 	int n,i;
 	printf("Zadej cislo n: ");
 	scanf("%d",&n);
 	if(n<1 || n>11){
 		printf("Cislo n musi byt v rozmezi (1-11).");
-		return shutdown();
+		return restart();
 	}
 
 	for(i=1;i<=n;i++){
