@@ -12,10 +12,10 @@ void trojuhelnik_rovnostranny(int n){
 		printf("\n");
 	}
 }
-void restart(){
+int shutdown(){
 	printf("\n\n");
-	fflush(stdin);
-	main();
+	system("PAUSE");
+	return 0;
 }
 int main(){
 	int n,i;
@@ -23,7 +23,7 @@ int main(){
 	scanf("%d",&n);
 	if(n<1 || n>11){
 		printf("Cislo n musi byt v rozmezi (1-11).");
-		restart();
+		return shutdown();
 	}
 
 	for(i=1;i<=n;i++){
@@ -31,5 +31,5 @@ int main(){
 		trojuhelnik_rovnostranny(i);
 	}
 
-	restart();
+	return shutdown();
 }
