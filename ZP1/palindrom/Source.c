@@ -1,7 +1,9 @@
 #include <stdio.h>
 int palindrom(char *retezec){
-	int delka,i;
-	for(delka=0;retezec[delka]!='\0';delka++);
+	int delka=0,i;
+	while(retezec[delka]!='\0'){ //delka=strlen(retezec)
+		delka++;
+	}
 	for(i=0;i<delka/2;i++){
 		if(retezec[i]!=retezec[delka-i-1]){
 			return 0;
