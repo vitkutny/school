@@ -8,7 +8,7 @@ void dve_nejvetsi_cisla(int a[],int n, int *first, int *second){
 		*second = *first;
 		*first = i;
 	}
-	for(i=0;i<=n-1;i++){
+	for(i=2;i<=n-1;i++){
 		if(a[i]>*second && a[i] <= *first){
 			*second = a[i];
 		}else if(a[i]>*first){
