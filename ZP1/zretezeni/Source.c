@@ -5,7 +5,7 @@
 char* zretezeni(char* a, char*b, char** c){
 	int i;
 	int j;
-	(*c)=malloc(sizeof(char)*(strlen(a)+strlen(b)));
+	(*c)=(char*)malloc(sizeof(char)*(strlen(a)+strlen(b)));
 	for (i=0;a[i]!='.';i++){
 		(*c)[i]=a[i];
 	}
