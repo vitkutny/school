@@ -24,7 +24,7 @@ void vykresleni_kosoctverce(int n){
 	strana = 2 * n + 1;
 	for (i = 0; i < strana; i++){
 		for (j = 0; j < strana; j++){
-			if (j == strana / 2 - i || j == strana / 2 + i || i == strana / 2 + j || i == 3 * n - j){
+			if (j == n - i || j == n + i || j == i - n || j == 3 * n - i){
 				printf("X");
 			}
 			else{
