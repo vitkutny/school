@@ -2,6 +2,7 @@
 
 int shutdown();
 int restart();
+int abs(int);
 void vykresleni_kosoctverce(int);
 
 int main(){
@@ -20,11 +21,10 @@ int main(){
 }
 
 void vykresleni_kosoctverce(int n){
-	int i, j, strana;
-	strana = 2 * n + 1;
-	for (i = 0; i < strana; i++){
-		for (j = 0; j < strana; j++){
-			if (j == n - i || j == n + i || j == i - n || j == 3 * n - i){
+	int i, j;
+	for (i = -n; i <= n; i++){
+		for (j = -n; j <= n; j++){
+			if (abs(j) == n - i || abs(j) == n + i){
 				printf("X");
 			}
 			else{
@@ -32,6 +32,15 @@ void vykresleni_kosoctverce(int n){
 			}
 		}
 		printf("\n");
+	}
+}
+
+int abs(int n){
+	if (n < 0){
+		return n*-1;
+	}
+	else{
+		return n;
 	}
 }
 
