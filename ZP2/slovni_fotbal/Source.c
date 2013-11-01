@@ -48,7 +48,7 @@ int game(slovo s){
 		printf("Slovo '%s' nezacina na pismeno '%c'.\n\n", s_new.value, s.value[s.length - 1]);
 		return game(s);
 	}
-	if (!in_dictionary(s_new.value)){
+	if (!in_dictionary("cz.txt", s_new.value)){
 		printf("Slovo '%s' neni ve slovniku.\n\n", s_new.value);
 		return game(s);
 	}
@@ -70,8 +70,35 @@ int already_used(slovo s_new){
 	}
 	return 0;
 }
-int in_dictionary(char* word){
-	return 1;
+int in_dictionary(char* dictionary, char* word){
+	FILE *file;
+	char radek[512];
+	int match = 0;
+	int i;
+	char* str;
+	str = (char*)malloc(sizeof(char)*(strlen(word) + 2));
+	for (i = 0; i < strlen(word); i++){
+		str[i] = word[i];
+	}
+	str[i] = '\n';
+	str[i + 1] = '\0';
+
+	file = fopen(dictionary, "r");
+
+	if (!file) {
+		return 0;
+	}
+
+	while (fgets(radek, 512, file)){
+		if (strmatch(radek, str)){
+			match = 1;
+		}
+	}
+
+	if (file) {
+		fclose(file);
+	}
+	return match;
 }
 int strmatch(char* a, char* b){
 	int i = 0;
