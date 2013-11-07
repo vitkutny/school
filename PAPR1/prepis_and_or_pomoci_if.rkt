@@ -8,6 +8,4 @@
     #t
     (if (= a 3)
         (if (> 5 b) #t #f)
-        (if c #t #f)
-    )
-)
+        (if c #t #f)))
