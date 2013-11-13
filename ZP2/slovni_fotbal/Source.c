@@ -11,10 +11,10 @@ int shutdown();
 void clear_screen();
 int game(slovo, char*);
 int already_used(slovo);
-int in_dict(char*);
+int in_dict(char*, char*);
 int strmatch(char*, char*);
 void header();
-void language_select();
+void language_select(char**);
 void get_first_word(slovo*);
 char* dict_add(char*, char*);
 
