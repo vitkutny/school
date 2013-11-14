@@ -1,0 +1,6 @@
+(define a (cons 1 2))
+(define b (cons 3 4))
+(define stred (lambda (a b)
+                (cons (/ (+ (car a) (car b)) 2)
+                      (/ (+ (cdr a) (cdr b)) 2))))
+(stred a b)
