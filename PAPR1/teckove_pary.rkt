@@ -1,12 +1,8 @@
-(define par (cons "prvni" "druhy"))
-par
-(car par) ;prvni prvek paru
-(cdr par) ;druhy prvek paru
+(define par (cons (cons 1 2)
+                  (cons 3 4)))
 
-(define abc (cons (cons 1 2) (cons 3 4)))
-abc
-(cdar abc) ;druhy prvek z prvniho paru
-(cadr abc) ;prvni prvek z druheho paru
-
-(cons (cons 1 (cons 3 (cons 5 6)))
-      (cons (cons 4 2) (cons 1 0)))
+(display "Teckovy par: ")(display par)(newline)
+(display "Prvni prvek: ")(display (car par))(newline)
+(display "Druhy prvek: ")(display (cdr par))(newline)
+(display "Prvni prvek z druheho paru: ")(display (cadr par))(newline)
+(display "Druhy prvek z prvniho paru: ")(display (cdar par))(newline)
