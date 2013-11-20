@@ -1,16 +1,19 @@
 #include <stdio.h>
 #include <string.h>
-int porovnej_retezce(char ret1[], char ret2[]){
-	int i;
-	for (i = 0; i <= strlen(ret1); i++){
-		if (ret1[i] > ret2[i]){
+int porovnej_retezce(char* a, char* b){
+	while (1){
+		if (*a > *b){
 			return 1;
 		}
-		else if (ret1[i] < ret2[i]){
+		else if (*a < *b){
 			return -1;
 		}
+		else if (*a == '\0' || *b == '\0'){
+			return 0;
+		}
+		a++;
+		b++;
 	}
-	return 0;
 }
 void main() {
 	porovnej_retezce("hromada", "hroznys"); // Funkce vrati zaporne cislo, "hromada" je v abecednim poradi pred "hroznys"
