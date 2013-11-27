@@ -10,6 +10,8 @@ void printArrayOFInt(int*, int);
 void sort_method_select(char*);
 void array_length_select(int*);
 void array_random(int*, int);
+void quickSort(int*, int, int);
+int quickSortPartition(int*, int, int);
 
 int main(){
 	int length;
@@ -36,6 +38,10 @@ int main(){
 	case 'S':
 		printf("\nByl pouzit selection sort.\n");
 		selectionSort(array, length);
+		break;
+	case 'Q':
+		printf("\nByl pouzit quick sort.\n");
+		quickSort(array, 0, length - 1);
 		break;
 	};
 
@@ -73,10 +79,16 @@ void printArrayOFInt(int *array, int length){
 	printf("\n");
 }
 void sort_method_select(char* method){
-	printf("\nJakou metodu trideni chcete pouzit?\n (I - Insertion sort, B - Bubble sort, S -selection sort): ");
+	printf(
+		"\nI - Insertion sort"
+		"\nB - Bubble sort"
+		"\nS - Selection sort"
+		"\nQ - Quick sort"
+		"\nJakou metodu trideni chcete pouzit? "
+		);
 	fflush(stdin);
 	scanf("%c", method);
-	if (*method == 'I' || *method == 'B' || *method == 'S'){
+	if (*method == 'I' || *method == 'B' || *method == 'S' || *method == 'Q'){
 		return;
 	}
 	else{
@@ -125,4 +137,31 @@ void selectionSort(int* array, int length){
 		array[j] = array[iMin];
 		array[iMin] = temp;
 	}
+}
+void quickSort(int* array, int p, int r){
+	int q;
+	if (p < r){
+		q = quickSortPartition(array, p, r); //pivot
+		quickSort(array, p, q - 1); //leva strana
+		quickSort(array, q + 1, r); //prava strana
+	}
+}
+int quickSortPartition(int* array, int p, int r){
+	int x, i, j, temp;
+	x = array[r];
+	i = p - 1;
+
+	for (j = p; j <= r - 1; j++){
+		if (array[j] <= x){
+			i++;
+			temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+	}
+	temp = array[i + 1];
+	array[i + 1] = array[r];
+	array[r] = temp;
+
+	return i + 1;
 }
