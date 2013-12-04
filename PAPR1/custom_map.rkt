@@ -10,3 +10,10 @@
                 (lambda (x)
                   (proc (list-ref l1 x) (list-ref l2 x) (list-ref l3 x))))))
 (map3 + '(1 2 3 4) '(5 2) '(2 3 3))
+
+
+;(define multi-map
+;  (lambda (proc . lists)
+;    lists))
+
+;(multi-map + '(1 2 3 4) '(5 2) '(2 3 3))

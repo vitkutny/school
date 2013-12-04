@@ -12,6 +12,7 @@ void array_length_select(int*);
 void array_random(int*, int);
 void quickSort(int*, int, int);
 int quickSortPartition(int*, int, int);
+void swap(int*, int*);
 
 int main(){
 	int length;
@@ -58,18 +59,6 @@ int shutdown(){
 	system("PAUSE");
 	return 0;
 }
-void insertionSort(int *array, int length){
-	int i, j, t;
-	for (j = 1; j <= length - 1; j++){
-		t = array[j];
-		i = j - 1;
-		while (i >= 0 && array[i] > t){
-			array[i + 1] = array[i];
-			i = i - 1;
-		}
-		array[i + 1] = t;
-	}
-}
 void printArrayOFInt(int *array, int length){
 	int i = 0;
 	printf("\nArray print:\n");
@@ -112,56 +101,62 @@ void array_random(int* array, int length){
 		array[i] = rand() % 100;
 	}
 }
+void swap(int* a, int* b){
+	int temp;
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
 void bubbleSort(int* array, int length){
-	int i, j, temp;
-	for (j = 0; j <= length - 2; j++){
-		for (i = length - 1; i >= j + 1; i--){
+	int i, j;
+	for (j = 1; j <= length - 1; j++){
+		for (i = length - 1; i >= j; i--){
 			if (array[i] < array[i - 1]){
-				temp = array[i];
-				array[i] = array[i - 1];
-				array[i - 1] = temp;
+				swap(&array[i], &array[i - 1]);
 			}
 		}
+	}
+}
+void insertionSort(int *array, int length){
+	int i, j, temp;
+	for (j = 1; j <= length - 1; j++){
+		temp = array[j];
+		for (i = j; i && array[i - 1] > temp; i--){
+			array[i] = array[i - 1];
+		}
+		array[i] = temp;
 	}
 }
 void selectionSort(int* array, int length){
-	int i, j, iMin, temp;
-	for (j = 0; j <= length - 2; j++){
-		iMin = j;
-		for (i = j + 1; i <= length - 1; i++){
-			if (array[i] < array[iMin]){
-				iMin = i;
+	int i, j, temp;
+	for (j = 1; j <= length - 1; j++){
+		temp = j - 1;
+		for (i = j; i <= length - 1; i++){
+			if (array[i] < array[temp]){
+				temp = i;
 			}
 		}
-		temp = array[j];
-		array[j] = array[iMin];
-		array[iMin] = temp;
+		swap(&array[j - 1], &array[temp]);
 	}
 }
-void quickSort(int* array, int p, int r){
-	int q;
-	if (p < r){
-		q = quickSortPartition(array, p, r); //pivot
-		quickSort(array, p, q - 1); //leva strana
-		quickSort(array, q + 1, r); //prava strana
+void quickSort(int* array, int left, int right){
+	int pivot;
+	if (left < right){
+		pivot = quickSortPartition(array, left, right);
+		quickSort(array, left, pivot - 1);
+		quickSort(array, pivot + 1, right);
 	}
 }
-int quickSortPartition(int* array, int p, int r){
-	int x, i, j, temp;
-	x = array[r];
-	i = p - 1;
+int quickSortPartition(int* array, int left, int right){
+	int i;
 
-	for (j = p; j <= r - 1; j++){
-		if (array[j] <= x){
-			i++;
-			temp = array[i];
-			array[i] = array[j];
-			array[j] = temp;
+	for (i = left; i <= right - 1; i++){
+		if (array[i] <= array[right]){
+			swap(&array[left], &array[i]);
+			left++;
 		}
 	}
-	temp = array[i + 1];
-	array[i + 1] = array[r];
-	array[r] = temp;
+	swap(&array[left], &array[right]);
 
-	return i + 1;
+	return left;
 }
