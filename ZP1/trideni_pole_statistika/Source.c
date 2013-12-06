@@ -73,7 +73,7 @@ int* randomArray(int size){
 }
 
 void printArrayInt(int* array, int size, int range){
-	int from, to, index, iteration;
+	int from, to, diff, i;
 	if (range == NULL){
 		from = 0;
 		to = size - 1;
@@ -86,14 +86,15 @@ void printArrayInt(int* array, int size, int range){
 		from = size + range;
 		to = size - 1;
 	}
+	diff = to - from;
 
 	printf("\n");
-	for (index = from, iteration = 1; index <= to; index++, iteration++){
-		printf("%i", array[index]);
-		if (iteration % 5){
+	for (i = 0; i <= diff; i++){
+		printf("%i", array[i + from]);
+		if ((i + 1) % 5){
 			printf("\t");
 		}
-		else if (index != to){
+		else if (i != diff){
 			printf("\n");
 		}
 	}
