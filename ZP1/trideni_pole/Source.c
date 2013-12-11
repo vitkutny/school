@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+#include <time.h>
 
 int restart();
 int shutdown();
@@ -12,12 +14,15 @@ void array_length_select(int*);
 void array_random(int*, int);
 void quickSort(int*, int, int);
 int quickSortPartition(int*, int, int);
+void mergeSort(int*, int, int);
+void merge(int*, int, int, int);
 void swap(int*, int*);
 
 int main(){
 	int length;
 	int* array;
 	char method;
+	srand(time(NULL));
 
 	array_length_select(&length);
 	sort_method_select(&method);
@@ -44,6 +49,10 @@ int main(){
 		printf("\nByl pouzit quick sort.\n");
 		quickSort(array, 0, length - 1);
 		break;
+	case 'M':
+		printf("\nByl pouzit merge sort.\n");
+		mergeSort(array, 0, length - 1);
+		break;
 	};
 
 	printArrayOFInt(array, length);
@@ -60,12 +69,17 @@ int shutdown(){
 	return 0;
 }
 void printArrayOFInt(int *array, int length){
-	int i = 0;
+	int i;
 	printf("\nArray print:\n");
-	for (i = 0; i < length; i++){
-		printf("%d ", array[i]);
+	for (i = 1; i <= length; i++){
+		printf("%d", array[i - 1]);
+		if (i % 5){
+			printf("\t");
+		}
+		else{
+			printf("\n");
+		}
 	}
-	printf("\n");
 }
 void sort_method_select(char* method){
 	printf(
@@ -73,11 +87,12 @@ void sort_method_select(char* method){
 		"\nB - Bubble sort"
 		"\nS - Selection sort"
 		"\nQ - Quick sort"
+		"\nM - Merge sort"
 		"\nJakou metodu trideni chcete pouzit? "
 		);
 	fflush(stdin);
 	scanf("%c", method);
-	if (*method == 'I' || *method == 'B' || *method == 'S' || *method == 'Q'){
+	if (*method == 'I' || *method == 'B' || *method == 'S' || *method == 'Q' || *method == 'M'){
 		return;
 	}
 	else{
@@ -109,10 +124,10 @@ void swap(int* a, int* b){
 }
 void bubbleSort(int* array, int length){
 	int i, j;
-	for (j = 1; j <= length - 1; j++){
-		for (i = length - 1; i >= j; i--){
-			if (array[i] < array[i - 1]){
-				swap(&array[i], &array[i - 1]);
+	for (i = 0; i < length - 1; i++){
+		for (j = 0; j < length - i - 1; j++){
+			if (array[j + 1] < array[j]){
+				swap(&array[j], &array[j + 1]);
 			}
 		}
 	}
@@ -159,4 +174,47 @@ int quickSortPartition(int* array, int left, int right){
 	swap(&array[left], &array[right]);
 
 	return left;
+}
+void mergeSort(int* array, int p, int r){
+	int q;
+	if (p < r){
+		q = (p + r) / 2;
+		mergeSort(array, p, q);
+		mergeSort(array, q + 1, r);
+		merge(array, p, q, r);
+	}
+}
+void merge(int* array, int p, int q, int r){
+	int i, j, k, n1, n2;
+	int* arrayLeft;
+	int* arrayRight;
+
+	n1 = q - p + 1;
+	n2 = r - q;
+
+	arrayLeft = (int*)malloc(sizeof(int)*(n1 + 1));
+	arrayRight = (int*)malloc(sizeof(int)*(n2 + 1));
+
+	for (i = 0; i <= n1 - 1; i++){
+		arrayLeft[i] = array[p + i];
+	}
+	for (j = 0; j <= n2 - 1; j++){
+		arrayRight[j] = array[q + 1 + j];
+	}
+
+	arrayLeft[n1] = INT_MAX;
+	arrayRight[n2] = INT_MAX;
+
+	i = 0;
+	j = 0;
+	for (k = p; k <= r; k++){
+		if (arrayLeft[i] <= arrayRight[j]){
+			array[k] = arrayLeft[i];
+			i++;
+		}
+		else{
+			array[k] = arrayRight[j];
+			j++;
+		}
+	}
 }
