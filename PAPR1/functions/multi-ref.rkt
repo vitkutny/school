@@ -1,5 +1,5 @@
 (define multi-ref
-  (lambda (lists value-index)
+  (lambda (value-index . lists)
     (let iter-lists ((list-index 0))
       (if (< list-index (length lists))
           (if (>= value-index (length (list-ref lists list-index)))
