@@ -6,9 +6,9 @@ void vypis_pole(int*, int);
 int mincovka(unsigned int, unsigned int**);
 
 int main(){
-	int* platidla;
+	unsigned int* platidla;
+	unsigned int castka = 12345;
 	int pocet;
-	int castka = 12345;
 
 	pocet = mincovka(castka, &platidla);
 
@@ -41,14 +41,14 @@ void vypis_pole(int* pole, int delka){
 int mincovka(unsigned int castka, unsigned int **platidla){
 	int i = 0, j;
 	int bankovky[] = { 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1 };
-	*platidla = (int*)malloc(NULL);
+	*platidla = (unsigned int*)malloc(NULL);
 
 	while (castka){
 		j = 0;
 		while (castka < bankovky[j]){ j++; }
 
 		castka -= bankovky[j];
-		*platidla = (int*)realloc(*platidla, sizeof(int)*(i + 1));
+		*platidla = (unsigned int*)realloc(*platidla, sizeof(unsigned int)*(i + 1));
 		(*platidla)[i] = bankovky[j];
 
 		i++;
