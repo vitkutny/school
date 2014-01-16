@@ -1,1 +1,1 @@
-![Timetable](timetable.jpg?raw=true)
+![Timetable](timetable.png?raw=true)
