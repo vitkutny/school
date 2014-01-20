@@ -12,7 +12,6 @@ void clear_screen();
 int game(slovo, char*);
 int already_used(slovo);
 int in_dict(char*, char*);
-int strmatch(char*, char*);
 void header();
 void language_select(char**);
 void get_first_word(slovo*);
@@ -37,10 +36,10 @@ int game(slovo s, char* dict){
 	scanf("%s", s_new.value);
 	s_new.length = strlen(s_new.value);
 
-	if (strmatch(s_new.value, "shutdown")){
+	if (strcmp(s_new.value, "shutdown") == 0){
 		return shutdown();
 	}
-	if (strmatch(s_new.value, "restart")){
+	if (strcmp(s_new.value, "restart") == 0){
 		return restart();
 	}
 
@@ -69,7 +68,7 @@ int already_used(slovo s_new){
 	int i;
 	slovo s_temp = *s_new.before;
 	while (s_temp.before != NULL){
-		if (strmatch(s_temp.value, s_new.value)){
+		if (strcmp(s_temp.value, s_new.value) == 0){
 			return 1;
 		}
 		s_temp = *s_temp.before;
@@ -98,7 +97,7 @@ int in_dict(char* dict, char* word){
 	}
 
 	while (fgets(radek, 512, file)){
-		if (strmatch(radek, str)){
+		if (strcmp(radek, str) == 0){
 			match = 1;
 		}
 	}
@@ -107,18 +106,6 @@ int in_dict(char* dict, char* word){
 		fclose(file);
 	}
 	return match;
-}
-int strmatch(char* a, char* b){
-	int i = 0;
-	for (i = 0; i < strlen(a) || a[i] != b[i]; i++){
-		if (a[i] != b[i]){
-			return 0;
-		}
-	}
-	if (i == strlen(b)){
-		return 1;
-	}
-	return 0;
 }
 void clear_screen(){
 	system("CLS");
