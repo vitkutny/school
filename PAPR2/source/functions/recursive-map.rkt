@@ -2,7 +2,8 @@
   (lambda (function list)
     (if (null? list)
         list
-        (cons (if (pair? (car list))
-                  (recursive-map function (car list))
-                  (function (car list)))
-              (recursive-map function (cdr list))))))
+        (if (pair? list)
+            (cons
+             (recursive-map function (car list))
+             (recursive-map function (cdr list)))
+            (function list)))))
