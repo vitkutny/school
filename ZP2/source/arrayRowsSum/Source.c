@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #define ROWS 5
 
-int* arrayRowsSum(int, int);
+int* arrayRowsSum(int**, int);
 int shutdown();
 
 int main()
