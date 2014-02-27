@@ -1,5 +1,5 @@
-(include "../functions/fibonacci.rkt")
-
-(fibonacci 0)
-(fibonacci 5)
-(fibonacci 10)
+(define fibonacci
+  (lambda (value)
+    (if (< value 2)
+        value
+        (+ (fibonacci (- value 1)) (fibonacci (- value 2))))))
