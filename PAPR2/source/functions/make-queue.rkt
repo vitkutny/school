@@ -12,14 +12,12 @@
       
       (define pop
         (lambda ()
-          (if (null? queue)
-              'NULL
-              (let ((value (car queue)))
-                (set! queue (cdr queue))
-                value))))
+          (let ((value (car queue)))
+            (set! queue (cdr queue))
+            value)))
       
       (lambda (signal . args)
         (cond ((equal? signal 'empty?) (is-empty?)) 
               ((equal? signal 'push) (push (car args)))
-              ((equal? signal 'pop) (pop))
+              ((equal? signal 'pop) (if (is-empty?) 'NULL (pop)))
               (else (error "unkown signal")))))))
