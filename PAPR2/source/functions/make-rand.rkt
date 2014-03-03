@@ -3,7 +3,7 @@
     
     (define (generate)
       (set! next (+ (* next 1103515245) 12345))
-      (modulo (numerator (/ next 65536)) 32768))
+      (modulo (floor (/ next 65536)) 32768))
     
     (define (seed seed)
       (set! next seed))
