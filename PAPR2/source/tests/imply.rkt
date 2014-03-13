@@ -1,4 +1,4 @@
-(include "../macros/imply.rkt")
+(include "../functions/imply.rkt")
 
 (equal? (imply #t 'true (print 'false)) 'true)
 (equal? (imply #f (print 'true) 'false) 'false)
