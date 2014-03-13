@@ -11,12 +11,11 @@ int shutdown();
 int main(){
 	int size = 5;
 	int** relation = relationCreate(size);
-	relation[0][2] = 1;
+	relation[0][1] = 1;
 	relation[1][2] = 1;
 	relation[2][0] = 1;
 	relation[2][2] = 1;
 	relation[2][4] = 1;
-
 
 	relationPrint(relation, size);
 	printf("Reflexive closure of ");
@@ -93,22 +92,25 @@ int** symmetricClosure(int** relation, int size){
 
 int** transitiveClosure(int** relation, int size){
 	int** closure = relationCreate(size);
-	int x, y, z;
+	int x, y, z, changed;
 
-	for (x = 0; x < size; x++){
-		for (y = 0; y < size; y++){
-			if (!closure[x][y]){
+	do{
+		changed = 0;
+		for (x = 0; x < size; x++){
+			for (y = 0; y < size; y++){
 				closure[x][y] = relation[x][y];
-			}
-			if (relation[x][y]){
-				for (z = 0; z < size; z++){
-					if (relation[y][z]){
-						closure[x][z] = 1;
+				if (relation[x][y]){
+					for (z = 0; z < size; z++){
+						if (relation[y][z] && !closure[x][z]){
+							closure[x][z] = 1;
+							changed = 1;
+						}
 					}
 				}
 			}
 		}
-	}
+		relation = closure;
+	} while (changed);
 
 	return closure;
 }
