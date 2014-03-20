@@ -1,0 +1,5 @@
+(define-macro (swap first second)
+  (quasiquote (let ((temp (gensym)))
+                (set! temp ,first)
+                (set! ,first ,second)
+                (set! ,second temp))))
