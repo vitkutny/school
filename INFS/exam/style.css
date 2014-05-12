@@ -1,0 +1,9 @@
+*{padding:0;margin:0}
+html,body,main{width:100%;height:100%}
+div{float:left;width:10%;height:10%}
+div.blue{background:#005}
+div.blue.active{background:#00F}
+div.green{background:#050}
+div.green.active{background:#0F0}
+div.red{background:#500}
+div.red.active{background:#F00}
