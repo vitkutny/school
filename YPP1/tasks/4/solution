@@ -1,0 +1,10 @@
+;(define (count list)
+;  (foldr (lambda (item result) (+ 1 result)) 0 list))
+;
+;(count '(1 2 3 10))
+
+(define (map-index-pred condition operation list)
+  (let ((iterator 0))
+    (map (lambda (item) (if (condition item) (operation item) item)) list)))
+
+(equal? (map-index-pred odd? sqr '(2 3 4 5)) '(2 9 4 25))
